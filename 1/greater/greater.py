@@ -4,3 +4,5 @@ x=input("Enter your BithDate:")
 y=input ("Enter partner's BirthDate:")
 if y>x:
     print("x is smaller than y")
+else:
+    print("x is bigger than y")
