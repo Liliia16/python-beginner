@@ -12,18 +12,18 @@ GENRES = {
 }
 
 ACTORS = {
-   'Robert De Niro': ['Meet the Parents'],
-  'Ben Stiller': ['Meet the Parents'],
-   'Adam Sandler': ['Anger Management'],
-   'Jack Nicholson': ['Anger Management'],
-   'Brendan Fraser': ['Mummy'],
-  'Rachel Weisz': ['Mummy'],
-  'Tom Cruise': ['Vanilla Sky', 'Mission Impossible'],
-  'Penelope Cruz': ['Vanilla Sky'],
-  'Cameron Diaz': ['Vanilla Sky'],
-  'Brad Pitt': ['Meet Joe Black'],
-  'Anthony Hopkins': ['Meet Joe Black'],
-  'Jeremy Renner': ['Mission Impossible']
+    'Robert De Niro': ['Meet the Parents'],
+    'Ben Stiller': ['Meet the Parents'],
+    'Adam Sandler': ['Anger Management'],
+    'Jack Nicholson': ['Anger Management'],
+    'Brendan Fraser': ['Mummy'],
+    'Rachel Weisz': ['Mummy'],
+    'Tom Cruise': ['Vanilla Sky', 'Mission Impossible'],
+    'Penelope Cruz': ['Vanilla Sky'],
+    'Cameron Diaz': ['Vanilla Sky'],
+    'Brad Pitt': ['Meet Joe Black'],
+    'Anthony Hopkins': ['Meet Joe Black'],
+    'Jeremy Renner': ['Mission Impossible']
 }
 
 # search_by_genre = input("Input: > Search by Genre: ")
@@ -32,7 +32,7 @@ ACTORS = {
 #     print(f"Output: Available Genres: {available_genres}")
 #
 #     user_genre = input("Input: > Enter genre: ")
-#     if user_genre in available_genres:
+#     if genre in GENRES:
 #         available_movies = GENRES[user_genre]
 #         print(f"Output: Available Movies: {available_movies}")
 #         user_movie = input("Input: > Enter movie: ")
@@ -74,7 +74,7 @@ CAST = {
 #     if search_by_cast == 'y':
 #         all_actors = []
 #         for actors_list in CAST.values():
-#             all_actors=all_actors+actors_list
+#             all_actors.extend(actors_list)
 #
 #         print(f"Output: Available Actors: {all_actors}")
 #
@@ -90,71 +90,45 @@ CAST = {
 #         if user_movie in available_movies:
 #             print(f"Output: Movie to watch: {user_movie}. Starring: {actor}.")
 
-
-
-is_search_by_answer_incorrect = True
-while is_search_by_answer_incorrect:
+while True:
     search_by_genre = input("Input: > Search by Genre: ")
     if search_by_genre == 'y':
-        is_search_by_answer_incorrect = False
-        available_genres = list(GENRES.keys())
-        print(f"Output: Available Genres: {available_genres}")
-        is_genre_answer_incorrect = True
-        while is_genre_answer_incorrect:
-            user_genre = input("Input: > Enter genre: ")
-            if user_genre in available_genres:
-                is_genre_answer_incorrect = False
-                available_movies = GENRES[user_genre]
-                print(f"Output: Available Movies: {available_movies}")
-                is_user_movie_answer_incorrect = True
-                while is_user_movie_answer_incorrect:
-                    user_movie = input("Input: > Enter movie: ")
-                    if user_movie in available_movies:
-                        is_user_movie_answer_incorrect = False
-                        print(f"Output: Movie to watch: {user_movie}. Genre: {user_genre}.")
+        print(f"Output: Available Genres: {list(GENRES.keys())}")
+        while True:
+            genre = input("Input: > Enter genre: ")
+            if genre in GENRES.keys():
+                print(f"Output: Available Movies: {GENRES[genre]}")
+                while True:
+                    movie = input("Input: > Enter movie: ")
+                    if movie in GENRES[genre]:
+                        print(f"Output: Movie to watch: {movie}. Genre: {genre}.")
+                        break
                     else:
-                        is_user_movie_answer_incorrect = True
-                        print(f"Movie [{user_movie}] not found. Please try again. Available Movies: {available_movies}.")
+                        print(f"Movie [{movie}] not found. Please try again. Available Movies: {GENRES[genre]}.")
+                break
             else:
-                is_genre_answer_incorrect = True
-                print(f'Genre [{user_genre}] not found. Please try again. Available Genres: {available_genres}.')
-
+                print(f'Genre [{genre}] not found. Please try again. Available Genres: {list(GENRES.keys())}.')
+        break
     elif search_by_genre == 'n':
-        is_search_by_answer_incorrect = False
-        is_search_by_actor_answer_incorrect = True
-        while is_search_by_actor_answer_incorrect:
-            search_by_actor = input("Input: > Search by Actor: ")
-            if search_by_actor == 'y':
-                is_search_by_actor_answer_incorrect = False
-                available_actors = list(ACTORS.keys())
-                print(f"Output: Available Actors: {available_actors}")
-                is_actor_answer_incorrect = True
-                while is_actor_answer_incorrect:
-                    actor = input("Input: > Enter actor: ")
-                    if actor in available_actors:
-                        is_actor_answer_incorrect = False
-                        movies = ACTORS[actor]
-                        print(f"Output: Available Movies: {movies}")
-
-                        is_movie_answer_incorrect = True
-                        while is_movie_answer_incorrect:
-                            user_movie = input("Input: > Enter movie: ")
-                            if user_movie in movies:
-                                is_movie_answer_incorrect = False
-                                print(f"Output: Movie to watch: {user_movie}. Actor: {actor}.")
-                            else:
-                                is_movie_answer_incorrect = True
-                                print(f"Output: Actor movie [{user_movie}] not found! Available Actors: {available_actors}")
-                    else:
-                        is_actor_answer_incorrect = True
-                        print(f"Output: Actor [{actor}] not found! Available Actors: {available_actors}")
-
-            elif search_by_actor == 'n':
-                is_search_by_answer_incorrect = True
-                is_search_by_actor_answer_incorrect = False
-            else:
-                print(f'You entered [{search_by_actor}] which is wrong answer! Available answers are [y] or [n].')
-                is_search_by_actor_answer_incorrect = True
+        search_by_actor = input("Input: > Search by Actor: ")
+        if search_by_actor == 'y':
+            print(f"Output: Available Actors: {list(ACTORS.keys())}")
+            while True:
+                actor = input("Input: > Enter actor: ")
+                if actor in ACTORS.keys():
+                    print(f"Output: Available Movies: {ACTORS[actor]}")
+                    while True:
+                        movie = input("Input: > Enter movie: ")
+                        if movie in ACTORS[actor]:
+                            print(f"Output: Movie to watch: {movie}. Actor: {actor}.")
+                            break
+                        else:
+                            print(f"Output: Actor movie [{movie}] not found! Available Actors: {list(ACTORS.keys())}")
+                    break
+                else:
+                    print(f"Output: Actor [{actor}] not found! Available Actors: {list(ACTORS.keys())}")
+            break
+        else:
+            print(f'You entered [{search_by_actor}] which is wrong answer! Available answers are [y] or [n].')
     else:
-        is_search_by_answer_incorrect = True
         print(f'You entered [{search_by_genre}] which is wrong answer! Available answers are [y] or [n].')
