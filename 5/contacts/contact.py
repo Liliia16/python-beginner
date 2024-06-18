@@ -29,5 +29,29 @@ class Contact:
         self.email = validate_email(email)
         self.age = validate_age(age)
 
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, name):
+        self._name = validate_name(name)
+
+    @property
+    def email(self):
+        return self._email
+
+    @email.setter
+    def email(self, email):
+        self._email = validate_email(email)
+
+    @property
+    def age(self):
+        return self._age
+
+    @age.setter
+    def age(self, age):
+        self._age = validate_age(age)
+
     def __str__(self):
         return f"{{'name': {self.name},'email': {self.email},'age': {self.age}}}"

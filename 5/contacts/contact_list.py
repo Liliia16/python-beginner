@@ -10,11 +10,9 @@ from contact import Contact
 # If you implement special methods required for Iterator Protocol, for example,
 # you will be able to do for loops with your custom list.
 
-
 class ContactList:
     def __init__(self):
         self.storage = []
-        self.index = 0
 
     def __iter__(self):
         return iter(self.storage)
@@ -23,7 +21,10 @@ class ContactList:
         return '[' + ','.join((str(c) for c in self.storage)) + ']'
 
     def append(self, contact: Contact):
-        self.storage.append(contact)
+        if isinstance(contact, Contact):
+            self.storage.append(contact)
+        else:
+            raise TypeError('Wrong contact type!')
 
     # Remember I told, that if you want to print your custom class nicely,
     # you need to defined __str__ method and tell python what to print exactly.
@@ -39,12 +40,17 @@ if __name__ == '__main__':
             name = input('name: ')
             email = input('email: ')
             age = input('age: ')
-            user = Contact(name=name, email=email, age=int(age))
+            contact = Contact(name=name, email=email, age=int(age))
         except ValueError as e:
             print(e)
             continue
 
-        contact_list.append(user)
+        try:
+            contact_list.append(contact)
+        except TypeError as e:
+            print(e)
+            continue
+
         proceed = input('add another one? (y/n): ')
 
         if proceed != 'y':
